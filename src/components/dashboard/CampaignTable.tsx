@@ -66,9 +66,9 @@ export function CampaignTable({ campaigns }: CampaignTableProps) {
                 className="border-b border-slate-700/30 transition-colors duration-150 even:bg-slate-800/30 hover:bg-slate-800/50"
               >
                 <td className="px-6 py-4">
-                  <span className="text-sm font-medium text-slate-50">
+                  <a href={`/dashboard/campaigns/${campaign.id}`} className="text-sm font-medium text-slate-50 hover:text-blue-400 hover:underline transition-colors">
                     {campaign.name}
-                  </span>
+                  </a>
                 </td>
                 <td className="px-6 py-4">
                   <Badge variant={statusVariant[campaign.status] || 'default'}>
