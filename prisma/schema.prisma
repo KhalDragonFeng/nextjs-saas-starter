@@ -1,0 +1,49 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String        @id @default(cuid())
+  name         String
+  email        String        @unique
+  passwordHash String
+  role         String        @default("member")
+  avatarUrl    String?
+  organization Organization? @relation(fields: [orgId], references: [id])
+  orgId        String?
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+}
+
+model Organization {
+  id        String     @id @default(cuid())
+  name      String
+  plan      String     @default("free")
+  members   User[]
+  campaigns Campaign[]
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+}
+
+model Campaign {
+  id           String       @id @default(cuid())
+  name         String
+  status       String       @default("draft")
+  channel      String       @default("email")
+  budget       Float        @default(0)
+  spent        Float        @default(0)
+  impressions  Int          @default(0)
+  clicks       Int          @default(0)
+  conversions  Int          @default(0)
+  organization Organization @relation(fields: [orgId], references: [id])
+  orgId        String
+  startDate    DateTime?
+  endDate      DateTime?
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+}
