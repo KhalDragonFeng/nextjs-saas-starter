@@ -7,9 +7,14 @@ export default async function CampaignDetailPage({ params }: { params: Promise<{
   const resolvedParams = await params;
   
   // Try to find in db, or use mock fallback if it's "1" "2" from the hardcoded list
-  let campaign: any = await prisma.campaign.findUnique({
-    where: { id: resolvedParams.id }
-  });
+  let campaign: any = null;
+  try {
+    campaign = await prisma.campaign.findUnique({
+      where: { id: resolvedParams.id }
+    });
+  } catch (error) {
+    console.error('Prisma fallback on Campaign Detail');
+  }
 
   if (!campaign) {
     // Just mock it so the user can easily see the AI demo
