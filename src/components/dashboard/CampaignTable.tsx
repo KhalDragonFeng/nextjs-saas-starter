@@ -22,7 +22,11 @@ const channelIcons: Record<string, string> = {
   display: '🖥️',
 };
 
+import { useRouter } from 'next/navigation';
+
 export function CampaignTable({ campaigns }: CampaignTableProps) {
+  const router = useRouter();
+  
   return (
     <div className="overflow-x-auto rounded-xl border border-slate-700/50 bg-slate-900">
       <table className="w-full text-left">
@@ -63,12 +67,13 @@ export function CampaignTable({ campaigns }: CampaignTableProps) {
             return (
               <tr
                 key={campaign.id}
-                className="border-b border-slate-700/30 transition-colors duration-150 even:bg-slate-800/30 hover:bg-slate-800/50"
+                onClick={() => router.push(`/dashboard/campaigns/${campaign.id}`)}
+                className="group cursor-pointer border-b border-slate-700/30 transition-colors duration-150 even:bg-slate-800/30 hover:bg-slate-800/50"
               >
                 <td className="px-6 py-4">
-                  <a href={`/dashboard/campaigns/${campaign.id}`} className="text-sm font-medium text-slate-50 hover:text-blue-400 hover:underline transition-colors">
+                  <span className="text-sm font-medium text-slate-50 group-hover:text-blue-400 transition-colors">
                     {campaign.name}
-                  </a>
+                  </span>
                 </td>
                 <td className="px-6 py-4">
                   <Badge variant={statusVariant[campaign.status] || 'default'}>
@@ -92,11 +97,9 @@ export function CampaignTable({ campaigns }: CampaignTableProps) {
                 </td>
                 <td className="px-6 py-4 text-sm text-slate-300">{ctr}%</td>
                 <td className="px-6 py-4">
-                  <button className="rounded-lg p-1.5 text-slate-400 transition-all duration-200 hover:bg-slate-700 hover:text-slate-200">
+                  <button className="rounded-lg p-1.5 text-slate-400 transition-all duration-200 hover:bg-slate-700 hover:text-slate-200" title="Go to Campaign AI Details">
                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <circle cx="12" cy="12" r="1" />
-                      <circle cx="12" cy="5" r="1" />
-                      <circle cx="12" cy="19" r="1" />
+                      <path d="M5 12h14M12 5l7 7-7 7"/>
                     </svg>
                   </button>
                 </td>
