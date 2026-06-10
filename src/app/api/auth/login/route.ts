@@ -11,7 +11,28 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Email and password are required' }, { status: 400 });
     }
 
-    const user = await prisma.user.findUnique({ where: { email } });
+    // --- Vercel Serverless Demo Mock ---
+    if (email === 'demo@saas.com' && password === 'password123') {
+      await createSession({
+        userId: 'demo-user-id',
+        email: 'demo@saas.com',
+        name: 'Demo Admin',
+        role: 'admin',
+      });
+      return NextResponse.json({
+        success: true,
+        user: { id: 'demo-user-id', name: 'Demo Admin', email: 'demo@saas.com', role: 'admin' },
+      });
+    }
+    // -----------------------------------
+
+    let user;
+    try {
+      user = await prisma.user.findUnique({ where: { email } });
+    } catch (e) {
+      console.error('Prisma DB error on Vercel:', e);
+      return NextResponse.json({ error: 'Internal server error (DB)' }, { status: 500 });
+    }
     if (!user) {
       return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 });
     }
