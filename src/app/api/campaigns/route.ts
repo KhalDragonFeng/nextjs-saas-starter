@@ -47,5 +47,8 @@ export async function POST(request: Request) {
       };
     }
     return NextResponse.json(campaign, { status: 201 });
+  } catch (error) {
+    console.error('Create campaign error:', error);
+    return NextResponse.json({ error: 'Failed to create campaign' }, { status: 500 });
   }
 }

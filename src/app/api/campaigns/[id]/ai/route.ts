@@ -63,7 +63,7 @@ export async function GET(
 ) {
   try {
     const resolvedParams = await params;
-    let copies = [];
+    let copies: any[] = [];
     try {
       copies = await prisma.aiCopy.findMany({
         where: { campaignId: resolvedParams.id },
