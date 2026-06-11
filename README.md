@@ -1,5 +1,23 @@
 # Next.js SaaS Starter — Production-Grade Dashboard Template
 
+[![CI](https://github.com/KhalDragonFeng/nextjs-saas-starter/actions/workflows/ci.yml/badge.svg)](https://github.com/KhalDragonFeng/nextjs-saas-starter/actions/workflows/ci.yml)
+
+## Client Snapshot
+
+This demo is a proof that I can turn a SaaS idea or AI-generated prototype into a working, deployable product shell.
+
+- Best fit: founders who need a SaaS MVP, admin dashboard, auth flow, campaign CRUD, analytics UI, or Prisma-backed API routes.
+- What it demonstrates: Next.js App Router, TypeScript, Prisma, protected routes, JWT sessions, dashboard UX, seed data, and production build readiness.
+- Verification path: `npm ci`, `cp .env.example .env`, `npm run db:setup`, `npm run build`.
+- Typical client outcome: a clean SaaS foundation that can be extended instead of rewritten after the prototype stage.
+
+## What To Check In 60 Seconds
+
+1. Open the live demo.
+2. Log in with the demo credentials below.
+3. Review the dashboard, campaign list, protected routes, and API-backed flows.
+4. Check the CI badge to confirm the project builds from a clean checkout.
+
 🔗 **Live Demo:** [https://nextjs-saas-starter-green.vercel.app/](https://nextjs-saas-starter-green.vercel.app/)
 
 > A full-featured, production-ready SaaS starter built with **Next.js 15**, **Prisma**, **Tailwind CSS**, and **TypeScript**. Clone it, run it, and start building your SaaS in minutes.
